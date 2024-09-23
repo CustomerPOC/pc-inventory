@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "ac562362-c872-4830-b639-d21678a8f7ff",
+		"name": "Prisma Cloud Inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5421615"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"prismaCloudBearerToken\", jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{prismaCloudApiKey}}\",\n    \"password\": \"{{prismaCloudApiSecret}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prismaCloudURL}}/login",
+					"host": [
+						"{{prismaCloudURL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inventory search",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Redlock-Auth",
+						"value": "{{prismaCloudBearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"limit\": {{limit}},\n  \"withResourceJson\": {{withResourceJson}},\n  \"startTime\": {{startTime}},\n  \"skipResult\": {{skipResult}},\n  \"sort\": [\n    {\n      \"field\": \"{{sortField}}\",\n      \"direction\": \"{{sortDirection}}\"\n    }\n  ],\n  \"query\": \"{{query}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prismaCloudURL}}/search/api/v2/config",
+					"host": [
+						"{{prismaCloudURL}}"
+					],
+					"path": [
+						"search",
+						"api",
+						"v2",
+						"config"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "prismaCloudURL",
+			"value": "https://api2.prismacloud.io",
+			"type": "string"
+		},
+		{
+			"key": "prismaCloudApiKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "prismaCloudApiSecret",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "limit",
+			"value": "100",
+			"type": "string"
+		},
+		{
+			"key": "withResourceJson",
+			"value": "true",
+			"type": "string"
+		},
+		{
+			"key": "startTime",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "skipResult",
+			"value": "false",
+			"type": "string"
+		},
+		{
+			"key": "sortField",
+			"value": "id",
+			"type": "string"
+		},
+		{
+			"key": "sortDirection",
+			"value": "asc",
+			"type": "string"
+		},
+		{
+			"key": "query",
+			"value": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances'",
+			"type": "string"
+		},
+		{
+			"key": "prismaCloudBearerToken",
+			"value": ""
+		}
+	]
+}
