@@ -38,3 +38,23 @@
   "query": "{{query}}"
 }
 ```
+
+### Example Body with Parameters
+
+Find all active EC2 Instances in AWS Virginia (us-east-1), limit to 10 results, and return the full asset JSON.
+
+```json
+ {
+  "limit": 10,
+  "withResourceJson": true,
+  "startTime": 0,
+  "skipResult": false,
+  "sort": [
+    {
+      "field": "id",
+      "direction": "asc"
+    }
+  ],
+  "query": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances' AND cloud.region = 'AWS Virginia' AND resource.status = Active"
+}
+```
