@@ -7,14 +7,17 @@
 	},
 	"item": [
 		{
-			"name": "login",
+			"name": "1 - login",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"pm.collectionVariables.set(\"prismaCloudBearerToken\", jsonData.token);"
+							"const jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"prismaCloudBearerToken\", jsonData.token);",
+							"",
+							"const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);",
+							"pm.collectionVariables.set('startTime', oneDayAgo.getTime());"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -49,7 +52,20 @@
 			"response": []
 		},
 		{
-			"name": "inventory search",
+			"name": "2 - inventory search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"nextPageToken\", jsonData.nextPageToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -81,6 +97,55 @@
 						"api",
 						"v2",
 						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 - inventory all results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Redlock-Auth",
+						"value": "{{prismaCloudBearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"limit\": {{limit}},\n  \"withResourceJson\": {{withResourceJson}},\n  \"pageToken\": \"{{nextPageToken}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prismaCloudURL}}/search/config/page",
+					"host": [
+						"{{prismaCloudURL}}"
+					],
+					"path": [
+						"search",
+						"config",
+						"page"
 					]
 				}
 			},
@@ -127,7 +192,7 @@
 		},
 		{
 			"key": "limit",
-			"value": "100",
+			"value": "0",
 			"type": "string"
 		},
 		{
@@ -163,6 +228,11 @@
 		{
 			"key": "prismaCloudBearerToken",
 			"value": ""
+		},
+		{
+			"key": "nextPageToken",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
