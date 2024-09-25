@@ -5,7 +5,7 @@
 
 ## Collection Variables to Set
 
- | name |  setting  | description | example
+ | Name |  Setting  | Description | Example
  |------|-----------|-------------|---------
  | prismaCloudApiKey | Prisma Cloud Security Principal | Prisma Cloud access key | edacf3ca-947a-48a1-bafd-b44626a4c047
  | prismaCloudApiSecret | Prisma Cloud Principal Secret | Password/secret value for username or access key | xxxxxxxxxxxx
@@ -14,10 +14,12 @@
 
 ## Query Parameters
 
- | name |  setting  | description | example
+ | Name |  Setting  | Description | Example
  |------|-----------|-------------|---------
- | query | RQL query | Config query to search inventory | `"config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances'"`
-| query | RQL query | Config query to search inventory | `"config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances'"`
+ | limit | Number of results | Number of results to return | `50`
+| withResourceJson | RQL query | Config query to search inventory | `true`
+| startTime | RQL query | Config query to search inventory | `0`
+| skipResult | RQL query | Config query to search inventory | `false`
 | query | RQL query | Config query to search inventory | `"config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances'"`
 
 
