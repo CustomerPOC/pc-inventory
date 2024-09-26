@@ -145,6 +145,14 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 ----
 #### 3 - inventory all results
 
+This request can only be made after an initial request to the [inventory search](#2---inventory-search) that 
+also returns a `nextPageToken` key in the response. Once executed this will return all results up-to 100,000 records.
+If there are more results a `nextPageToken` will be included in the response that can be used again on this same 
+endpoint to return additional results. This process can be repeated until all results have been returned.
+
+> [!IMPORTANT]
+> When dealing with large amounts of data in the response it is important to handle for 
+> [rate limiting](https://pan.dev/prisma-cloud/api/cspm/rate-limits/#handling-rate-limits)
 
 ##### Body
 
@@ -156,8 +164,6 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 }
 ```
 ---
-
-<br />
 
 ### Environment
 
