@@ -54,7 +54,6 @@
 > current time minus 24 hours.
 
 <br />
-<br />
 
 ---
 
@@ -70,7 +69,6 @@
 #### **API: 1 - login**
 
 <br />
-<br />
 
 **Body**
 
@@ -81,7 +79,6 @@
 }
 ```
 
-<br />
 <br />
 
 **Script**
@@ -97,7 +94,6 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 ----
 #### **API: 2 - inventory search**
 
-<br />
 <br />
 
 **Body**
@@ -119,7 +115,6 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 ```
 
 <br />
-<br />
 
 **Script**
 
@@ -131,7 +126,6 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 ----
 #### **API: 3 - inventory all results**
 
-<br />
 <br />
 
 **Body**
@@ -151,8 +145,7 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
  |------|--------|
  | Prisma Cloud Inventory | `Prisma Cloud Inventory.postman_environment.json`
 
-<br />
-<br />
+---
 
 #### Environment Variables
 
