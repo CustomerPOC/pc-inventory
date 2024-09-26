@@ -46,14 +46,16 @@
  | sortDirection | `string` | Static
  | query | `string` | Static
 
-<br>
-<br>
-  > [!NOTE]
-  > The startTime varaible should be in Unix epoch timestamp. When the initial
-  > login is initiated there is a script that will set the current time to the
-  > current time minus 24 hours.
-<br>
-<br>
+<br />
+<br />
+
+> [!NOTE]
+> The startTime varaible should be in Unix epoch timestamp. When the initial
+> login is initiated there is a script that will set the current time to the
+> current time minus 24 hours.
+
+<br />
+<br />
 
 ---
 
