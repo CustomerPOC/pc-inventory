@@ -1,3 +1,47 @@
+# Postman Collection and Environment
+
+This repo contains examples for how to make API calls against Prisma Cloud Config queries to return JSON data from inventory.
+
+- [Getting Started](#getting-started)
+  - [Setup Environment](#setup-environment)
+  - [Setup Collection](#setup-collection)
+  - [Modify Query](#modify-query)
+  - [Make a Request](#make-a-request)
+
+
+## Getting Started
+
+### Setup Environment
+
+Open Postman, navigate to "Environments", select "Import", and follow the instuctions to upload a file. The file to upload is [Prisma Cloud Inventory.postman_environment.json](Prisma%20Cloud%20Inventory.postman_environment.json)
+
+![importenv](./Images/1-importenv.png)
+
+Once imported set the values for:  
+
+  - prismaCloudURL 
+  - prismaCloudApiKey
+  - prismaCloudApiSecret
+  
+
+![setenv](./Images/2-importenv.png)
+
+### Setup Collection
+
+Open Postman, navigate to "Collections", select "Import", and follow the instuctions to upload a file. The file to upload is [Prisma Cloud Inventory.postman_collection.json](Prisma%20Cloud%20Inventory.postman_collection.json)
+
+![importcol](./Images/1-importcol.png)
+
+Once both the Environment and Collections have been created navigate to the `Prisma Cloud Inventory` collection, and select the `Prisma Cloud Inventory` environment that was created earlier. This scopes those variables to this collection.
+
+~[setcol](./Images/2-importcol.png)
+
+### Modify Query
+
+### Make a Request
+
+
+
 ## Offical API Documentation
 
 - [Prisma Cloud APIs](https://pan.dev/prisma-cloud/api/)
@@ -6,11 +50,6 @@
 
 ## Postman Data
 
-- [Getting Started](#api-1---login)
-  - [Import Files](#api-1---login)
-  - [Set Environment Variables](#api-1---login)
-  - [Modify Query](#api-1---login)
-  - [Make a Request](#api-1---login)
 - [Collection](#collection)
   - [Collection Variables](#collection-variables)
   - [Collection APIs](#collection-apis)
@@ -25,6 +64,12 @@
   - [Return all AWS EKS clusters](#return-all-aws-eks-clusters)
   - [Return all Azure CosmosDB databases](#return-all-azure-cosmosdb-databases)
   - [Return all Azure compute resources in East US 2 in resource groups matching the name MC_ (AKS managed node-group)](#return-all-azure-compute-resources-in-east-us-2-in-resource-groups-matching-the-name-mc_-aks-managed-node-group)
+
+---
+
+### Getting Started
+
+
 
 ### Collection
 
