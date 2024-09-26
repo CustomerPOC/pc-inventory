@@ -69,6 +69,8 @@
 ----
 #### **API: 1 - login**
 
+<br />
+<br />
 
 **Body**
 
@@ -78,6 +80,10 @@
     "password": "{{prismaCloudApiSecret}}"
 }
 ```
+
+<br />
+<br />
+
 **Script**
 
 ```JavaScript
@@ -91,6 +97,8 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 ----
 #### **API: 2 - inventory search**
 
+<br />
+<br />
 
 **Body**
 
@@ -109,6 +117,10 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
   "query": "{{query}}"
 }
 ```
+
+<br />
+<br />
+
 **Script**
 
 ```JavaScript
@@ -119,6 +131,8 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 ----
 #### **API: 3 - inventory all results**
 
+<br />
+<br />
 
 **Body**
 
@@ -136,6 +150,9 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
  | Name |  File  | 
  |------|--------|
  | Prisma Cloud Inventory | `Prisma Cloud Inventory.postman_environment.json`
+
+<br />
+<br />
 
 #### Environment Variables
 
