@@ -50,7 +50,7 @@
 
 > [!NOTE]
 > The startTime varaible should be in Unix epoch timestamp. When the initial
-> login is initiated there is a script that will set the current time to the
+> login is initiated there is a [script](#script) that will set the current time to the
 > current time minus 24 hours.
 
 <br />
@@ -81,7 +81,7 @@
 
 <br />
 
-**Script**
+##### Script
 
 ```JavaScript
 const jsonData = pm.response.json();
