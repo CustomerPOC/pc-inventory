@@ -2,14 +2,37 @@
 
 This repo contains examples for how to make API calls against Prisma Cloud Config queries to return JSON data from inventory.
 
-- [Getting Started](#getting-started)
+## Getting Started
+
   - [Setup Environment](#setup-environment)
   - [Setup Collection](#setup-collection)
   - [Modify Query](#modify-query)
   - [Make a Request](#make-a-request)
 
+## Offical API Documentation
 
-## Getting Started
+- [Prisma Cloud APIs](https://pan.dev/prisma-cloud/api/)
+- [Perform Config Search V2](https://pan.dev/prisma-cloud/api/cspm/search-config-v-2/)
+- [Get The Next Config Search Page](https://pan.dev/prisma-cloud/api/cspm/search-config-page/)
+
+## Postman Data
+
+- [Collection](#collection)
+  - [Collection Variables](#collection-variables)
+  - [Collection APIs](#collection-apis)
+    - [1 - login](#1---login)
+    - [2 - inventory search ](#2---inventory-search)
+    - [3 - inventory all results](#3---inventory-all-results)
+- [Environment](#environment)
+  - [Environment Variables](#environment-variables)
+- [Query Examples](#query-examples)
+  - [Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)](#return-all-s3-buckets-in-aws-virginia-us-east-1-and-aws-california-us-west-1)
+  - [Return all AWS ECR container images that have been deleted](#return-all-aws-ecr-container-images-that-have-been-deleted)
+  - [Return all AWS EKS clusters](#return-all-aws-eks-clusters)
+  - [Return all Azure CosmosDB databases](#return-all-azure-cosmosdb-databases)
+  - [Return all Azure compute resources in East US 2 in resource groups matching the name MC_ (AKS managed node-group)](#return-all-azure-compute-resources-in-east-us-2-in-resource-groups-matching-the-name-mc_-aks-managed-node-group)
+  
+---
 
 ### Setup Environment
 
@@ -63,36 +86,6 @@ To make a request against the APIs use the following workflow.
 3. Navigate to 3 - inventory all results and click "Send" to return query results
 
 ![searchall](./Images/2-search.png)
-
-
-## Offical API Documentation
-
-- [Prisma Cloud APIs](https://pan.dev/prisma-cloud/api/)
-- [Perform Config Search V2](https://pan.dev/prisma-cloud/api/cspm/search-config-v-2/)
-- [Get The Next Config Search Page](https://pan.dev/prisma-cloud/api/cspm/search-config-page/)
-
-## Postman Data
-
-- [Collection](#collection)
-  - [Collection Variables](#collection-variables)
-  - [Collection APIs](#collection-apis)
-    - [1 - login](#1---login)
-    - [2 - inventory search ](#2---inventory-search)
-    - [3 - inventory all results](#3---inventory-all-results)
-- [Environment](#environment)
-  - [Environment Variables](#environment-variables)
-- [Query Examples](#query-examples)
-  - [Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)](#return-all-s3-buckets-in-aws-virginia-us-east-1-and-aws-california-us-west-1)
-  - [Return all AWS ECR container images that have been deleted](#return-all-aws-ecr-container-images-that-have-been-deleted)
-  - [Return all AWS EKS clusters](#return-all-aws-eks-clusters)
-  - [Return all Azure CosmosDB databases](#return-all-azure-cosmosdb-databases)
-  - [Return all Azure compute resources in East US 2 in resource groups matching the name MC_ (AKS managed node-group)](#return-all-azure-compute-resources-in-east-us-2-in-resource-groups-matching-the-name-mc_-aks-managed-node-group)
-
----
-
-### Getting Started
-
-
 
 ### Collection
 
