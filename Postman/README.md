@@ -47,7 +47,6 @@
  | query | `string` | Static
 
 <br />
-<br />
 
 > [!NOTE]
 > The startTime varaible should be in Unix epoch timestamp. When the initial
@@ -69,7 +68,7 @@
 
 ----
 #### **API: 1 - login**
-----
+
 
 **Body**
 
@@ -91,7 +90,7 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 
 ----
 #### **API: 2 - inventory search**
-----
+
 
 **Body**
 
@@ -119,7 +118,7 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 
 ----
 #### **API: 3 - inventory all results**
-----
+
 
 **Body**
 
