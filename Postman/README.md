@@ -12,12 +12,17 @@
     - [1 - login](#api-1---login)
     - [2 - inventory search ](#api-2---inventory-search)
     - [3 - inventory all results](#api-3---inventory-all-results)
+- [Environment](#environment)
+  - [Environment Variables](#environment-variables)
+- [Query Examples](#query-examples)
 
 ### Collection
 
  | Name |  File  | 
  |------|--------|
  | Prisma Cloud Inventory | `Prisma Cloud Inventory.postman_collection.json`
+
+---
 
 #### Collection Variables
 
@@ -30,6 +35,13 @@
  | sortField | `string` | Static
  | sortDirection | `string` | Static
  | query | `string` | Static
+
+> [!NOTE]
+> The startTime varaible should be in Unix epoc timestamp. When the initial
+> login is initiated there is a script that will set the current time to the
+> current time minus 24 hours.
+
+---
 
 #### Collection APIs
 
@@ -102,6 +114,7 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
   "pageToken": "{{nextPageToken}}"
 }
 ```
+---
 
 ### Environment
 
@@ -120,68 +133,6 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
  | nextPageToken | `securestring` | Dynamic
 
  ---
-
-> [!NOTE]
-> The startTime varaible should be in Unix epoc timestamp.
-> Setting the startTime variable to 0 will search all config data since the start of asset discovery
-> 
-
-> [!CAUTION]
-> NOT including `resource.status = Active` in your RQL query
-> will result in returning all assets including resources that have been deleted.
->
-> As many cloud workloads are ephemeral (temporary compute, containers, etc.) this
-> results in a large amount of data and should be avoided unless necessary.
->
-
-## Query Parameters
-
- | Name |  Setting  | Description | Example
- |------|-----------|-------------|---------
- | limit | Number of results | Number of results to return | `50`
-| withResourceJson | RQL query | Config query to search inventory | `true`
-| startTime | RQL query | Config query to search inventory | `0`
-| skipResult | RQL query | Config query to search inventory | `false`
-| query | RQL query | Config query to search inventory | `"config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances'"`
-
-
-### Postman Body with Parameters
-
-```json
- {
-  "limit": {{limit}},
-  "withResourceJson": {{withResourceJson}},
-  "startTime": {{startTime}},
-  "skipResult": {{skipResult}},
-  "sort": [
-    {
-      "field": "{{sortField}}",
-      "direction": "{{sortDirection}}"
-    }
-  ],
-  "query": "{{query}}"
-}
-```
-
-### Example Body with Parameters
-
-Find all active EC2 Instances in AWS Virginia (us-east-1) and AWS California (us-west-1), limit to 10 results, and return the full asset JSON.
-
-```json
- {
-  "limit": 10,
-  "withResourceJson": true,
-  "startTime": 0,
-  "skipResult": false,
-  "sort": [
-    {
-      "field": "id",
-      "direction": "asc"
-    }
-  ],
-  "query": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances' AND cloud.region = 'AWS Virginia' AND resource.status = Active"
-}
-```
 
 ## Query Examples
 
