@@ -106,9 +106,18 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 ----
 #### 2 - inventory search
 
-<br />
+This request will run an RQL config query. By default we set the limit of returned records to 0 (all), 
+but the limit is typically 100 records. If there are more than 100 records returned a `nextPageToken` 
+will be in the response. This token is used on [Get Next Config Search](#3---inventory-all-results) endpoint
+to return all results.
 
-**Body**
+> [!NOTE]
+> The [Get Next Config Search](#3---inventory-all-results) endpoint returns all results INCLUDING 
+> results from the [inventory search](#2---inventory-search). Because of this it is recommended to 
+> check for the existence of the `nextPageToken` key in the response, and then only use the data 
+> returned from the [Get Next Config Search](#3---inventory-all-results) endpoint.
+
+##### Body
 
 ```json
 {
@@ -126,9 +135,7 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 }
 ```
 
-<br />
-
-**Script**
+##### Script
 
 ```JavaScript
 var jsonData = pm.response.json();
