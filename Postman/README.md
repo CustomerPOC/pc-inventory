@@ -1,16 +1,58 @@
 ##
 
+Offical API Documentation
+
 [Perform Config Search V2](https://pan.dev/prisma-cloud/api/cspm/search-config-v-2/)
 
+[Get The Next Config Search Page](https://pan.dev/prisma-cloud/api/cspm/search-config-page/)
 
-## Collection Variables to Set
+
+## Postman Collection
+
+Scripts
+
+Login
+
+```JavaScript
+const jsonData = pm.response.json();
+pm.collectionVariables.set("prismaCloudBearerToken", jsonData.token);
+
+const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+pm.collectionVariables.set('startTime', oneDayAgo.getTime());
+```
+
+Inventory Search
+
+```JavaScript
+var jsonData = pm.response.json();
+pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
+```
+
+
+### Collection Variables
 
  | Name |  Setting  | Description | Example
  |------|-----------|-------------|---------
  | prismaCloudApiKey | Prisma Cloud Security Principal | Prisma Cloud access key | edacf3ca-947a-48a1-bafd-b44626a4c047
  | prismaCloudApiSecret | Prisma Cloud Principal Secret | Password/secret value for username or access key | xxxxxxxxxxxx
- | prismaCloudURL | Prisma Cloud Base URL | Your Prisma Cloud app stack API URL | https://api2.prismacloud.io
+ | prismaCloudURL | Prisma Cloud API URL | Your Prisma Cloud app-stack API URL | https://api2.prismacloud.io
 
+
+ | Name |  Type  | Assignment  | 
+ |------|--------|-------------|
+ | prismaCloudApiKey | `string` | Static
+ | prismaCloudApiSecret | `string` | Static
+ | prismaCloudURL | `string` | Static
+ | limit | `integer` | Static
+ | withResourceJson | `boolean` | Static
+ | startTime | `integer` | Dynamic/Static
+ | skipResult | `boolean` | Static
+ | sortField | `string` | Static
+ | sortDirection | `string` | Static
+ | query | `string` | Static
+ | prismaCloudBearerToken | `string` | Dynamic
+ | prismaCloudBearerToken | `string` | Dynamic
+ | nextPageToken | `string` | Dynamic
 
 ## Query Parameters
 
