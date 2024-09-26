@@ -38,6 +38,16 @@ Once both the Environment and Collections have been created navigate to the `Pri
 
 ### Modify Query
 
+The default query in the Postman collection will find EC2 instances in AWS Virginia (us-east-1). 
+
+```shell
+config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances' AND cloud.region = 'AWS Virginia' AND resource.status = Active
+```
+
+To modify a query you can adjust the query variable in the collection or modify the [body](#body-1) in [2 - inventory search ](#2---inventory-search). Example queries can be found [here](#query-examples).
+
+![query](./Images/1-query.png)
+
 ### Make a Request
 
 
