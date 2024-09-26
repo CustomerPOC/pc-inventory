@@ -53,6 +53,20 @@ pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
  | prismaCloudBearerToken | `string` | Dynamic
  | nextPageToken | `string` | Dynamic
 
+> [!NOTE]
+> The startTime varaible should be in UNIX EPOCH format.
+> Setting the startTime variable to 0 will search all config data since the start of asset discovery
+> 
+
+> [!CAUTION]
+> Setting the startTime variable to 0 and NOT including `resource.status = Active`
+> will result in returning a signifcant amount of data.
+> Using those settings will search all discovered assets since the begining of time
+> and also include all deleted assets. 
+>
+> As many cloud workloads are ephemeral (temporary compute, containers, etc.) this
+> results in a large amount of data.
+
 ## Query Parameters
 
  | Name |  Setting  | Description | Example
