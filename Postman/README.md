@@ -34,7 +34,7 @@ Open Postman, navigate to "Collections", select "Import", and follow the instuct
 
 Once both the Environment and Collections have been created navigate to the `Prisma Cloud Inventory` collection, and select the `Prisma Cloud Inventory` environment that was created earlier. This scopes those variables to this collection.
 
-~[setcol](./Images/2-importcol.png)
+![setcol](./Images/2-importcol.png)
 
 ### Modify Query
 
