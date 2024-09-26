@@ -45,12 +45,11 @@ pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
  | prismaCloudURL | `string` | Static
  | limit | `integer` | Static
  | withResourceJson | `boolean` | Static
- | startTime | `integer` | Dynamic/Static
+ | startTime | `integer` | Dynamic (default) or Static
  | skipResult | `boolean` | Static
  | sortField | `string` | Static
  | sortDirection | `string` | Static
  | query | `string` | Static
- | prismaCloudBearerToken | `string` | Dynamic
  | prismaCloudBearerToken | `string` | Dynamic
  | nextPageToken | `string` | Dynamic
 
