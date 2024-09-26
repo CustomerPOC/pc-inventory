@@ -59,13 +59,12 @@ pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
 > 
 
 > [!CAUTION]
-> Setting the startTime variable to 0 and NOT including `resource.status = Active`
-> will result in returning a signifcant amount of data.
-> Using those settings will search all discovered assets since the begining of time
-> and also include all deleted assets. 
+> NOT including `resource.status = Active` in your RQL query
+> will result in returning all assets including resources that have been deleted.
 >
 > As many cloud workloads are ephemeral (temporary compute, containers, etc.) this
-> results in a large amount of data.
+> results in a large amount of data and should be avoided unless necessary.
+>
 
 ## Query Parameters
 
