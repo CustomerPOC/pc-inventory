@@ -10,7 +10,7 @@
   - [Import Files](#api-1---login)
   - [Set Environment Variables](#api-1---login)
   - [Modify Query](#api-1---login)
-  - [Making a Request](#api-1---login)
+  - [Make a Request](#api-1---login)
 - [Collection](#collection)
   - [Collection Variables](#collection-variables)
   - [Collection APIs](#collection-apis)
@@ -23,6 +23,8 @@
   - [Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)](#return-all-s3-buckets-in-aws-virginia-us-east-1-and-aws-california-us-west-1)
   - [Return all AWS ECR container images that have been deleted](#return-all-aws-ecr-container-images-that-have-been-deleted)
   - [Return all AWS EKS clusters](#return-all-aws-eks-clusters)
+  - [Return all Azure CosmosDB databases](#return-all-azure-cosmosdb-databases)
+  - [Return all Azure compute resources in East US 2 in resource groups matching the name MC_ (AKS managed node-group)](#return-all-azure-compute-resources-in-east-us-2-in-resource-groups-matching-the-name-mc_-aks-managed-node-group)
 
 ### Collection
 
@@ -160,4 +162,16 @@ config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon 
 
 ```shell
 config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EKS' AND api.name = 'aws-eks-describe-cluster'
+```
+
+#### Return all Azure CosmosDB databases
+
+```shell
+config from cloud.resource where cloud.type = 'azure' AND cloud.service = 'Azure CosmosDB' AND api.name = 'azure-cosmos-db'
+```
+
+#### Return all Azure compute resources in East US 2 in resource groups matching the name MC_ (AKS managed node-group)
+
+```shell
+config from cloud.resource where cloud.type = 'azure' AND cloud.service = 'Azure Compute' AND cloud.region IN ( 'Azure East US 2' ) AND azure.resource.group matches 'MC_'
 ```
