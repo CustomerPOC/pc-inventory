@@ -50,6 +50,19 @@ To modify a query you can adjust the query variable in the collection or modify 
 
 ### Make a Request
 
+To make a request against the APIs use the following workflow.
+
+1. Navigate to 1 - login and click "Send" to generate a bearer token
+
+![login](./Images/1-login.png)
+
+2. Navigate to 2 - inventory search and click "Send" to return query results
+
+![search](./Images/1-search.png)
+
+3. Navigate to 3 - inventory all results and click "Send" to return query results
+
+![searchall](./Images/2-search.png)
 
 
 ## Offical API Documentation
