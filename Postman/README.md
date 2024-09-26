@@ -14,9 +14,9 @@
 - [Collection](#collection)
   - [Collection Variables](#collection-variables)
   - [Collection APIs](#collection-apis)
-    - [1 - login](#api-1---login)
-    - [2 - inventory search ](#api-2---inventory-search)
-    - [3 - inventory all results](#api-3---inventory-all-results)
+    - [1 - login](#1---login)
+    - [2 - inventory search ](#2---inventory-search)
+    - [3 - inventory all results](#3---inventory-all-results)
 - [Environment](#environment)
   - [Environment Variables](#environment-variables)
 - [Query Examples](#query-examples)
@@ -66,11 +66,11 @@
  | 3 - inventory all results | `POST` | /search/config/page | `false`
 
 ----
-#### **API: 1 - login**
 
-<br />
+#### 1 - login
 
-**Body**
+
+##### Body
 
 ```json
 {
@@ -78,6 +78,14 @@
     "password": "{{prismaCloudApiSecret}}"
 }
 ```
+
+<br />
+
+> [!WARNING]
+> Make certain you scope the correct Environment in Postman before
+> making the initial login call. The included script will automatically set
+> an environment variable named prismaCloudBearerToken which will overwrite
+> any existing value for an Environment scoped variable of the same name.
 
 <br />
 
@@ -92,7 +100,7 @@ pm.collectionVariables.set('startTime', oneDayAgo.getTime());
 ```
 
 ----
-#### **API: 2 - inventory search**
+#### 2 - inventory search
 
 <br />
 
@@ -124,11 +132,10 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 ```
 
 ----
-#### **API: 3 - inventory all results**
+#### 3 - inventory all results
 
-<br />
 
-**Body**
+##### Body
 
 ```json
 {
@@ -139,7 +146,6 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 ```
 ---
 
-<br />
 <br />
 
 ### Environment
@@ -162,7 +168,6 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 
  ---
 
-<br />
 <br />
 
 ## Query Examples
