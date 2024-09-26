@@ -97,7 +97,7 @@ pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
 
 ### Example Body with Parameters
 
-Find all active EC2 Instances in AWS Virginia (us-east-1), limit to 10 results, and return the full asset JSON.
+Find all active EC2 Instances in AWS Virginia (us-east-1) and AWS California (us-west-1), limit to 10 results, and return the full asset JSON.
 
 ```json
  {
@@ -113,4 +113,24 @@ Find all active EC2 Instances in AWS Virginia (us-east-1), limit to 10 results, 
   ],
   "query": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances' AND cloud.region = 'AWS Virginia' AND resource.status = Active"
 }
+```
+
+## Query Examples
+
+Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)
+
+```shell
+config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon S3' AND api.name = 'aws-s3api-get-bucket-acl' AND cloud.region IN ('AWS Virginia', 'AWS California' )
+```
+
+Return all AWS ECR container images that have been deleted
+
+```shell
+config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon ECR' AND api.name = 'aws-ecr-image' AND resource.status = Deleted
+```
+
+Return all AWS EKS clusters
+
+```shell
+config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EKS' AND api.name = 'aws-eks-describe-cluster'
 ```

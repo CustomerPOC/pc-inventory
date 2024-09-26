@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"const jsonData = pm.response.json();",
-							"pm.collectionVariables.set(\"prismaCloudBearerToken\", jsonData.token);",
+							"pm.environment.set(\"prismaCloudBearerToken\", jsonData.token);",
 							"",
 							"const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);",
 							"pm.collectionVariables.set('startTime', oneDayAgo.getTime());"
@@ -59,7 +59,7 @@
 					"script": {
 						"exec": [
 							"var jsonData = pm.response.json();",
-							"pm.collectionVariables.set(\"nextPageToken\", jsonData.nextPageToken);"
+							"pm.environment.set(\"nextPageToken\", jsonData.nextPageToken);"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -176,21 +176,6 @@
 	],
 	"variable": [
 		{
-			"key": "prismaCloudURL",
-			"value": "https://api2.prismacloud.io",
-			"type": "string"
-		},
-		{
-			"key": "prismaCloudApiKey",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "prismaCloudApiSecret",
-			"value": "",
-			"type": "string"
-		},
-		{
 			"key": "limit",
 			"value": "0",
 			"type": "string"
@@ -222,16 +207,7 @@
 		},
 		{
 			"key": "query",
-			"value": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances'",
-			"type": "string"
-		},
-		{
-			"key": "prismaCloudBearerToken",
-			"value": ""
-		},
-		{
-			"key": "nextPageToken",
-			"value": "",
+			"value": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances' AND cloud.region = 'AWS Virginia' AND resource.status = Active",
 			"type": "string"
 		}
 	]
