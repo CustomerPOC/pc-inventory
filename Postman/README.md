@@ -53,8 +53,6 @@
 > login is initiated there is a [script](#script) that will set the current time to the
 > current time minus 24 hours.
 
-<br />
-
 ---
 
 #### Collection APIs
@@ -69,6 +67,13 @@
 
 #### 1 - login
 
+The login request should be made before any subsequent calls. Upon successful 
+authentication a bearer token is set as an Environment variable that is used 
+on other calls to Prisma Cloud endpoints.
+
+> [!NOTE]
+> The generated token expires after 10 minutes. If you run into 401 errors 
+> try to first login again to generate a new token.
 
 ##### Body
 
@@ -84,10 +89,9 @@
 > [!WARNING]
 > Make certain you scope the correct Environment in Postman before
 > making the initial login call. The included script will automatically set
-> an environment variable named prismaCloudBearerToken which will overwrite
-> any existing value for an Environment scoped variable of the same name.
+> an environment variable named `prismaCloudBearerToken` which will overwrite
+> any existing value for an environment scoped variable of the same name.
 
-<br />
 
 ##### Script
 
