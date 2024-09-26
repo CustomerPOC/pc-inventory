@@ -1,48 +1,28 @@
-##
+## Offical API Documentation
 
-Offical API Documentation
+- [Prisma Cloud APIs](https://pan.dev/prisma-cloud/api/)
+- [Perform Config Search V2](https://pan.dev/prisma-cloud/api/cspm/search-config-v-2/)
+- [Get The Next Config Search Page](https://pan.dev/prisma-cloud/api/cspm/search-config-page/)
 
-[Perform Config Search V2](https://pan.dev/prisma-cloud/api/cspm/search-config-v-2/)
+## Postman Data
 
-[Get The Next Config Search Page](https://pan.dev/prisma-cloud/api/cspm/search-config-page/)
+- [Collection](#collection)
+  - [Collection Variables](#collection-variables)
+  - [Collection APIs](#collection-apis)
+    - [1 - login](#api-1---login)
+    - [2 - inventory search ](#api-2---inventory-search)
+    - [3 - inventory all results](#api-3---inventory-all-results)
 
+### Collection
 
-## Postman Collection
+ | Name |  File  | 
+ |------|--------|
+ | Prisma Cloud Inventory | `Prisma Cloud Inventory.postman_collection.json`
 
-Scripts
-
-Login
-
-```JavaScript
-const jsonData = pm.response.json();
-pm.collectionVariables.set("prismaCloudBearerToken", jsonData.token);
-
-const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-pm.collectionVariables.set('startTime', oneDayAgo.getTime());
-```
-
-Inventory Search
-
-```JavaScript
-var jsonData = pm.response.json();
-pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
-```
-
-
-### Collection Variables
-
- | Name |  Setting  | Description | Example
- |------|-----------|-------------|---------
- | prismaCloudApiKey | Prisma Cloud Security Principal | Prisma Cloud access key | edacf3ca-947a-48a1-bafd-b44626a4c047
- | prismaCloudApiSecret | Prisma Cloud Principal Secret | Password/secret value for username or access key | xxxxxxxxxxxx
- | prismaCloudURL | Prisma Cloud API URL | Your Prisma Cloud app-stack API URL | https://api2.prismacloud.io
-
+#### Collection Variables
 
  | Name |  Type  | Assignment  | 
  |------|--------|-------------|
- | prismaCloudApiKey | `string` | Static
- | prismaCloudApiSecret | `string` | Static
- | prismaCloudURL | `string` | Static
  | limit | `integer` | Static
  | withResourceJson | `boolean` | Static
  | startTime | `integer` | Dynamic (default) or Static
@@ -50,11 +30,99 @@ pm.collectionVariables.set("nextPageToken", jsonData.nextPageToken);
  | sortField | `string` | Static
  | sortDirection | `string` | Static
  | query | `string` | Static
- | prismaCloudBearerToken | `string` | Dynamic
- | nextPageToken | `string` | Dynamic
+
+#### Collection APIs
+
+ | Name | Method | Endpoint | Script |
+ |------|--------|----------|--------|
+ | 1 - login | `POST` | /login | `true`
+ | 2 - inventory search | `POST` | /search/api/v2/config | `true`
+ | 3 - inventory all results | `POST` | /search/config/page | `false`
+
+----
+#### **API: 1 - login**
+----
+
+**Body**
+
+```json
+{
+    "username": "{{prismaCloudApiKey}}",
+    "password": "{{prismaCloudApiSecret}}"
+}
+```
+**Script**
+
+```JavaScript
+const jsonData = pm.response.json();
+pm.environment.set("prismaCloudBearerToken", jsonData.token);
+
+const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+pm.collectionVariables.set('startTime', oneDayAgo.getTime());
+```
+
+----
+#### **API: 2 - inventory search**
+----
+
+**Body**
+
+```json
+{
+  "limit": {{limit}},
+  "withResourceJson": {{withResourceJson}},
+  "startTime": {{startTime}},
+  "skipResult": {{skipResult}},
+  "sort": [
+    {
+      "field": "{{sortField}}",
+      "direction": "{{sortDirection}}"
+    }
+  ],
+  "query": "{{query}}"
+}
+```
+**Script**
+
+```JavaScript
+var jsonData = pm.response.json();
+pm.environment.set("nextPageToken", jsonData.nextPageToken);
+```
+
+----
+#### **API: 3 - inventory all results**
+----
+
+**Body**
+
+```json
+{
+  "limit": {{limit}},
+  "withResourceJson": {{withResourceJson}},
+  "pageToken": "{{nextPageToken}}"
+}
+```
+
+### Environment
+
+ | Name |  File  | 
+ |------|--------|
+ | Prisma Cloud Inventory | `Prisma Cloud Inventory.postman_environment.json`
+
+#### Environment Variables
+
+ | Name |  Type  | Assignment  | 
+ |------|--------|-------------|
+ | prismaCloudApiKey | `string` | Static
+ | prismaCloudApiSecret | `securestring` | Static
+ | prismaCloudURL | `string` | Static
+ | prismaCloudBearerToken | `securestring` | Dynamic
+ | nextPageToken | `securestring` | Dynamic
+
+ ---
 
 > [!NOTE]
-> The startTime varaible should be in UNIX EPOCH format.
+> The startTime varaible should be in Unix epoc timestamp.
 > Setting the startTime variable to 0 will search all config data since the start of asset discovery
 > 
 
