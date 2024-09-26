@@ -15,6 +15,9 @@
 - [Environment](#environment)
   - [Environment Variables](#environment-variables)
 - [Query Examples](#query-examples)
+  - [Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)](#return-all-s3-buckets-in-aws-virginia-us-east-1-and-aws-california-us-west-1)
+  - [Return all AWS ECR container images that have been deleted](#return-all-aws-ecr-container-images-that-have-been-deleted)
+  - [Return all AWS EKS clusters](#return-all-aws-eks-clusters)
 
 ### Collection
 
@@ -136,19 +139,19 @@ pm.environment.set("nextPageToken", jsonData.nextPageToken);
 
 ## Query Examples
 
-Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)
+#### Return all S3 buckets in AWS Virginia (us-east-1) and AWS California (us-west-1)
 
 ```shell
 config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon S3' AND api.name = 'aws-s3api-get-bucket-acl' AND cloud.region IN ('AWS Virginia', 'AWS California' )
 ```
 
-Return all AWS ECR container images that have been deleted
+#### Return all AWS ECR container images that have been deleted
 
 ```shell
 config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon ECR' AND api.name = 'aws-ecr-image' AND resource.status = Deleted
 ```
 
-Return all AWS EKS clusters
+#### Return all AWS EKS clusters
 
 ```shell
 config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EKS' AND api.name = 'aws-eks-describe-cluster'
