@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "ac562362-c872-4830-b639-d21678a8f7ff",
+		"name": "Prisma Cloud Inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5421615"
+	},
+	"item": [
+		{
+			"name": "1 - login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.environment.set(\"prismaCloudBearerToken\", jsonData.token);",
+							"",
+							"const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);",
+							"pm.collectionVariables.set('startTime', oneDayAgo.getTime());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{prismaCloudApiKey}}\",\n    \"password\": \"{{prismaCloudApiSecret}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prismaCloudURL}}/login",
+					"host": [
+						"{{prismaCloudURL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2 - inventory search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"nextPageToken\", jsonData.nextPageToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Redlock-Auth",
+						"value": "{{prismaCloudBearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"limit\": {{limit}},\n  \"withResourceJson\": {{withResourceJson}},\n  \"startTime\": {{startTime}},\n  \"skipResult\": {{skipResult}},\n  \"sort\": [\n    {\n      \"field\": \"{{sortField}}\",\n      \"direction\": \"{{sortDirection}}\"\n    }\n  ],\n  \"query\": \"{{query}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prismaCloudURL}}/search/api/v2/config",
+					"host": [
+						"{{prismaCloudURL}}"
+					],
+					"path": [
+						"search",
+						"api",
+						"v2",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 - inventory all results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Redlock-Auth",
+						"value": "{{prismaCloudBearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"limit\": {{limit}},\n  \"withResourceJson\": {{withResourceJson}},\n  \"pageToken\": \"{{nextPageToken}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prismaCloudURL}}/search/config/page",
+					"host": [
+						"{{prismaCloudURL}}"
+					],
+					"path": [
+						"search",
+						"config",
+						"page"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "limit",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "withResourceJson",
+			"value": "true",
+			"type": "string"
+		},
+		{
+			"key": "startTime",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "skipResult",
+			"value": "false",
+			"type": "string"
+		},
+		{
+			"key": "sortField",
+			"value": "id",
+			"type": "string"
+		},
+		{
+			"key": "sortDirection",
+			"value": "asc",
+			"type": "string"
+		},
+		{
+			"key": "query",
+			"value": "config from cloud.resource where cloud.type = 'aws' AND cloud.service = 'Amazon EC2' AND api.name = 'aws-ec2-describe-instances' AND cloud.region = 'AWS Virginia' AND resource.status = Active",
+			"type": "string"
+		}
+	]
+}
